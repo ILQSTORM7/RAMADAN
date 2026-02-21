@@ -3,121 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramazan 2026 - Hər Şey Daxil</title>
+    <title>Ramazan Portalı 2026</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="image.png" type="image/x-icon">
+    
     <style>
+        /* CSS - Dizayn Hissəsi */
         :root {
-            --gold: #d4af37;
-            --dark-green: #062112;
+            --primary: #064e3b;
+            --gold: #fbbf24;
+            --light: #f8fafc;
         }
+
         body {
-            background-color: var(--dark-green);
-            background-image: radial-gradient(circle at center, #0a3d1e 0%, #062112 100%);
-            color: white;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #022c22;
+            color: var(--light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding-bottom: 50px;
+        }
+
+        /* Başlıq sahəsi */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1542750613-19e977ef8ba7?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        /* Əsas kart */
+        .main-timer-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-top: -60px;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        #countdown {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+        }
+
+        /* Funksional kartlar */
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 5px solid var(--gold);
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Zikr Sayğacı */
+        .zikr-circle {
+            width: 120px;
+            height: 120px;
+            border: 5px solid var(--gold);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .main-container {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            border: 2px solid var(--gold);
-            border-radius: 30px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-            max-width: 500px;
-            width: 90%;
-        }
-        h1 { color: var(--gold); font-weight: 800; margin-bottom: 5px; }
-        #timer-label { font-size: 1.1rem; opacity: 0.8; margin-top: 20px; }
-        #countdown {
-            font-size: 4rem;
-            font-weight: 900;
-            color: var(--gold);
-            margin: 10px 0;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-        .control-panel {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        .azan-btn {
-            background: var(--gold);
-            color: var(--dark-green);
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
+            font-size: 2rem;
             font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin: 20px auto;
+            cursor: pointer;
+            user-select: none;
+            transition: 0.2s;
         }
-        .azan-btn:hover {
-            transform: translateY(-3px);
-            background: white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+
+        .zikr-circle:active {
+            transform: scale(0.9);
+            background: var(--gold);
+            color: var(--primary);
         }
-        .azan-btn:active { transform: translateY(0); }
-        .stop-btn { background: #ff4d4d !important; color: white !important; }
+
+        .btn-azan {
+            background-color: var(--gold);
+            color: var(--primary);
+            font-weight: bold;
+            border-radius: 50px;
+            padding: 10px 30px;
+            border: none;
+        }
+
+        .btn-stop { background-color: #ef4444 !important; color: white !important; }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <h1>🌙 RAMAZAN</h1>
-        <p>2026-cı il üçün geri sayım</p>
+    <header class="hero text-center">
+        <h1 class="display-3 fw-bold text-warning">RAMAZAN 2026</h1>
+        <p class="lead fw-bold">Xoş gəldin, Ya Şəhri-Ramazan!</p>
+    </header>
 
-        <div id="timer-label">İftara qalan vaxt:</div>
-        <div id="countdown">00:00:00</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                
+                <div class="main-timer-card text-center mb-5">
+                    <h2 id="timer-label" class="mb-3">İftara qalan vaxt:</h2>
+                    <div id="countdown">00:00:00</div>
+                    
+                    <div class="mt-4">
+                        <audio id="myAzan">
+                            <source src="https://server8.mp3quran.net/afs/001.mp3" type="audio/mpeg">
+                        </audio>
+                        <button onclick="toggleAzan()" id="azanBtn" class="btn-azan shadow">
+                            <i class="fas fa-mosque me-2"></i> AZANI SƏSLƏNDİR
+                        </button>
+                    </div>
+                </div>
 
-        <div class="control-panel">
-            <p class="small mb-3">Məkkə Azanı</p>
-            <audio id="audioPlayer">
-                <source src="https://www.youtube.com/results?search_query=azan" type="audio/mpeg">
-                <source src="https://server8.mp3quran.net/afs/001.mp3" type="audio/mpeg">
-            </audio>
-            
-            <button onclick="toggleSound()" id="playBtn" class="azan-btn">AZANI ÇAL ▶️</button>
-        </div>
-        
-        <div class="mt-4 small opacity-50">
-            Bakı vaxtı ilə iftar: 18:40 təyin edilib
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <h4 class="text-warning"><i class="fas fa-hands-praying"></i> Günün Duası</h4>
+                            <p class="mt-3 italic">"Allahummə ləkə sumtu və bikə aməntu və alə rizqikə əftartu. Zəhəbəz-zəməu vəbtəllətil-uruqu və səbətəl-əcru inşallah."</p>
+                            <small class="opacity-75">Tərcüməsi: Allahım! Sənin üçün oruc tutdum, Sənə iman gətirdim və Sənin ruzinlə iftar etdim...</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <div class="info-card">
+                            <h4 class="text-warning"><i class="fas fa-beads"></i> Elektron Təsbeh</h4>
+                            <div class="zikr-circle" onclick="countZikr()" id="zikrDisplay">0</div>
+                            <button onclick="resetZikr()" class="btn btn-sm btn-outline-warning">Sıfırla</button>
+                            <p class="mt-2 small opacity-50">Dairəyə klikləyərək zikr edin</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="info-card">
+                            <h4 class="text-warning"><i class="fas fa-book-quran"></i> Günün Hədisi</h4>
+                            <blockquote class="blockquote mt-2">
+                                <p>"Kim inanaraq və mükafatını Allahdan gözləyərək Ramazan orucunu tutarsa, keçmiş günahları bağışlanar."</p>
+                                <footer class="blockquote-footer text-light opacity-50">Buxari və Müslim</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="info-card">
+                            <h4 class="text-warning mb-4"><i class="fas fa-clock"></i> Bakı üçün təxmini vaxtlar</h4>
+                            <div class="row text-center">
+                                <div class="col"><h6>İmsak</h6><p class="text-warning">05:20</p></div>
+                                <div class="col"><h6>Günçıxan</h6><p>06:45</p></div>
+                                <div class="col"><h6>Zöhr</h6><p>12:45</p></div>
+                                <div class="col"><h6>Əsr</h6><p>16:20</p></div>
+                                <div class="col"><h6>İftar</h6><p class="text-warning">18:40</p></div>
+                                <div class="col"><h6>İşa</h6><p>20:05</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        const audio = document.getElementById('audioPlayer');
-        const btn = document.getElementById('playBtn');
+    <footer class="text-center mt-5 py-4 border-top border-secondary">
+        <p class="mb-0 opacity-50">© 2026 Mübarək Ramazan Ayı | Hazırladı: Gemini AI</p>
+    </footer>
 
-        // Səsi idarə etmək
-        function toggleSound() {
-            if (audio.paused) {
-                audio.play().catch(() => alert("Zəhmət olmasa əvvəlcə səhifəyə bir dəfə klikləyin!"));
-                btn.innerHTML = "DAYANDIR ⏸️";
-                btn.classList.add('stop-btn');
+    <script>
+        // --- 1. AZAN PLAYING ---
+        const azan = document.getElementById('myAzan');
+        const btn = document.getElementById('azanBtn');
+
+        function toggleAzan() {
+            if (azan.paused) {
+                azan.play();
+                btn.innerHTML = '<i class="fas fa-stop me-2"></i> DAYANDIR';
+                btn.classList.add('btn-stop');
             } else {
-                audio.pause();
-                audio.currentTime = 0;
-                btn.innerHTML = "AZANI ÇAL ▶️";
-                btn.classList.remove('stop-btn');
+                azan.pause();
+                azan.currentTime = 0;
+                btn.innerHTML = '<i class="fas fa-mosque me-2"></i> AZANI SƏSLƏNDİR';
+                btn.classList.remove('btn-stop');
             }
         }
 
-        // Vaxtı hesablamaq
-        function updateClock() {
+        // --- 2. COUNTDOWN TIMER ---
+        function runTimer() {
             const now = new Date();
             let target = new Date();
             
-            // İftar vaxtı (18:40:00)
+            // Hədəf: Bu gün saat 18:40 (İftar)
             target.setHours(18, 40, 0);
 
+            // Əgər iftar keçibsə, səhəri günün imsakını (05:20) hədəf seç
             if (now > target) {
-                // Əgər iftar keçibsə, səhura qalan vaxtı göstər (məsələn 05:20)
                 document.getElementById('timer-label').innerText = "Səhura qalan vaxt:";
                 target.setDate(target.getDate() + 1);
                 target.setHours(5, 20, 0);
@@ -133,9 +225,26 @@
             document.getElementById('countdown').innerText = 
                 `${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
         }
+        setInterval(runTimer, 1000);
+        runTimer();
 
-        setInterval(updateClock, 1000);
-        updateClock();
+        // --- 3. ZIKR COUNTER ---
+        let zikrCount = 0;
+        function countZikr() {
+            zikrCount++;
+            document.getElementById('zikrDisplay').innerText = zikrCount;
+            // Titrəmə effekti
+            if(zikrCount % 33 === 0) {
+                document.getElementById('zikrDisplay').style.color = 'white';
+                setTimeout(() => { document.getElementById('zikrDisplay').style.color = '#fbbf24'; }, 300);
+            }
+        }
+        function resetZikr() {
+            zikrCount = 0;
+            document.getElementById('zikrDisplay').innerText = 0;
+        }
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
