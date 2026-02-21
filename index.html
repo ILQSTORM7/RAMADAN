@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramazan 2026 - Hər Şey Daxil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-green: #062112;
+        }
+        body {
+            background-color: var(--dark-green);
+            background-image: radial-gradient(circle at center, #0a3d1e 0%, #062112 100%);
+            color: white;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .main-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 { color: var(--gold); font-weight: 800; margin-bottom: 5px; }
+        #timer-label { font-size: 1.1rem; opacity: 0.8; margin-top: 20px; }
+        #countdown {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin: 10px 0;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        .control-panel {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .azan-btn {
+            background: var(--gold);
+            color: var(--dark-green);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .azan-btn:hover {
+            transform: translateY(-3px);
+            background: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .azan-btn:active { transform: translateY(0); }
+        .stop-btn { background: #ff4d4d !important; color: white !important; }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h1>🌙 RAMAZAN</h1>
+        <p>2026-cı il üçün geri sayım</p>
+
+        <div id="timer-label">İftara qalan vaxt:</div>
+        <div id="countdown">00:00:00</div>
+
+        <div class="control-panel">
+            <p class="small mb-3">Məkkə Azanı</p>
+            <audio id="audioPlayer">
+                <source src="https://www.youtube.com/results?search_query=azan" type="audio/mpeg">
+                <source src="https://server8.mp3quran.net/afs/001.mp3" type="audio/mpeg">
+            </audio>
+            
+            <button onclick="toggleSound()" id="playBtn" class="azan-btn">AZANI ÇAL ▶️</button>
+        </div>
+        
+        <div class="mt-4 small opacity-50">
+            Bakı vaxtı ilə iftar: 18:40 təyin edilib
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audioPlayer');
+        const btn = document.getElementById('playBtn');
+
+        // Səsi idarə etmək
+        function toggleSound() {
+            if (audio.paused) {
+                audio.play().catch(() => alert("Zəhmət olmasa əvvəlcə səhifəyə bir dəfə klikləyin!"));
+                btn.innerHTML = "DAYANDIR ⏸️";
+                btn.classList.add('stop-btn');
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+                btn.innerHTML = "AZANI ÇAL ▶️";
+                btn.classList.remove('stop-btn');
+            }
+        }
+
+        // Vaxtı hesablamaq
+        function updateClock() {
+            const now = new Date();
+            let target = new Date();
+            
+            // İftar vaxtı (18:40:00)
+            target.setHours(18, 40, 0);
+
+            if (now > target) {
+                // Əgər iftar keçibsə, səhura qalan vaxtı göstər (məsələn 05:20)
+                document.getElementById('timer-label').innerText = "Səhura qalan vaxt:";
+                target.setDate(target.getDate() + 1);
+                target.setHours(5, 20, 0);
+            } else {
+                document.getElementById('timer-label').innerText = "İftara qalan vaxt:";
+            }
+
+            const diff = target - now;
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById('countdown').innerText = 
+                `${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
